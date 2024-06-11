@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<meta http-equiv="X-UA-Compatible" content="ie=edge" />
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css"
+		integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous" />
+	<link rel="stylesheet" href="css/style.css" />
+	<title>Them's Fightin' Words</title>
+	<script type="text/javascript" src="JS/config.js" defer></script>
+	<script type="text/javascript" src="JS/WordBank.js" defer></script>
+	<script type="text/javascript" src="./JS/ParseWordBank.js" defer></script>
+</head>
+<body>
+  <div class="HashTable" id="word_bank_file"></div>
+  <div class="join-container">
+    <header class="join-header">
+      <h1>Them's Fightin' Words</h1>
+    </header>
+    <main class="join-main">
+      <form id="myForm" action="grid.html">
+        <div class="form-control">
+          <label for="username">Username</label>
+          <input type="text" name="username" id="username" placeholder="Enter username..." required />
+        </div>
+        <div class="form-control">
+          <label for="room">Room</label>
+          <select name="room" id="room">
+            <option value="JavaScript">JavaScript</option>
+            <option value="Python">Python</option>
+            <option value="PHP">PHP</option>
+            <option value="C#">C#</option>
+            <option value="Ruby">Ruby</option>
+            <option value="Java">Java</option>
+          </select>
+        </div>
+        <button type="submit" class="btn">Join Room</button>
+      </form>
+      <button onclick="openConfig()" class="btn" style="visibility: hidden">Config</button>
+      <div id="config" class="config">
+        <div id="config-content" class="config-content">
+          <br>
+          <h3>Change theme:</h3>
+          <table>
+            <tr>
+              <td><button onclick="setTheme('Western')" title="Western" class="btn">Western</button></td>
+              <td><button onclick="setTheme('Modern')" title="Modern" class="btn">Modern</button></td>
+              <td><button onclick="setTheme('Normal')" title="Normal" class="btn">Normal</button></td>
+            </tr>
+          </table>
+          <br>
+          <h3>Change Board Width and Height:</h3>
+          <table>
+            <tr>
+              <td><label for="Width">Width:</label></td>
+              <td><label for="Height">Height:</label></td>
+            </tr>
+            <tr>
+              <td><input type="text" id="width" name="width" title="Default 15 tile width"></td>
+              <td><input type="text" id="height" name="height" title="Default 15 tile height"></td>
+            </tr>
+          </table>
+          <br>
+          <h3>Change Letter Values:</h3>
+          <table>
+            <tr>
+              <td><label for="letter">Letter:</label></td>
+              <td><label for="value">Value:</label></td>
+            </tr>
+            <tr>
+              <td><input type="text" id="letter" name="letter" title="Enter a letter to change the value of: "></td>
+              <td><input type="text" id="value" name="value" title="Enter a value to change the letter's value: "></td>
+            </tr>
+          </table>
+          <br>
+          <h3>Change Effect Tile Count:</h3>
+          <label for="effectCount">Effect Tile Count:</label>
+          <input type="text" id="effectCount" name="effectCount" title="Default 30 tiles, <number>% also accepted">
+          <br><br>
+          <label>Select Word Bank:</label><br>
+          <label><input type="radio" name="word_bank_option">English Dictionary</label><br>
+          <label><input type="radio" name="word_bank_option">Custom Text File</label><br><br>
+          <h3>Custom Text File Options:</h3>
+          <table>
+            <tr>
+              <td><label for="lineDelim">Line Delimited:</label></td>
+              <td><label for="commaDelim">Comma Delimited:</label></td>
+            </tr>
+            <tr>
+              <td><input type="file" id="lineDelim" accept=".txt" /></td>
+              <td><input type="file" id="commaDelim" accept=".txt" /></td>
+            </tr>
+          </table>
+          <br>
+          <table>
+            <tr>
+              <td><button type="button" onclick="saveChanges()" class="btn">Save</button></td>
+              <td><button onclick="closeConfig()" class="btn">Close</button></td>
+            </tr>
+          </table>
+        </div>
+      </div>
+    </main>
+  </div>
+  <script>
+    document.getElementById('myForm').addEventListener('submit', function (event) {
+      event.preventDefault(); // Prevent the form from submitting
+
+      // Retrieve the form values
+      const username = document.getElementById('username').value;
+      const room = document.getElementById('room').value;
+      const existingUsernames = [];
+      // Sanitize the username
+      const sanitizedUsername = username.replace(/[^a-z0-9._-]/gi, '').slice(0, 20);
+//        existingUsernames.push(sanitizedUsername);
+      // Check if the username is valid
+      if (sanitizedUsername.length < 3) {
+        // Username is empty or contains only invalid characters
+        alert('Please enter a valid username between 3 and 20 characters.');
+      // } else if (existingUsernames.includes(sanitizedUsername)) {
+      //   // Username already exists in the array
+      //   alert('Username already taken. Please choose a different username.');
+      } else {
+        // Join the room
+        localStorage.setItem('username', sanitizedUsername);
+        localStorage.setItem('room', room);
+
+        window.location.href = 'grid.html';
+      }
+    });
+  </script>
+</body>
+
+</html>

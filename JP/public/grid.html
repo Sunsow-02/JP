@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=chrome">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Them's Fightin' Words!</title>
+    <link rel="stylesheet" href="css/stylesheet.css">
+    <script src="/socket.io/socket.io.js" defer></script>
+    <script src="https://cdn.pubnub.com/sdk/javascript/pubnub.4.21.7.js" defer></script>
+    <script type="text/javascript" src="JS/TileClasses.js" defer></script>
+    <script type="text/javascript" src="JS/dragdrop.js" defer></script>
+    <script type="text/javascript" src="JS/TurnHandling.js" defer></script>
+    <script type="text/javascript" src="JS/getpoints.js" defer></script>
+    <script type="text/javascript" src="JS/WordBank.js" defer></script>
+    <script type="text/javascript" src="JS/grid.js" defer></script>
+    <script type="text/javascript" src="JS/main.js" defer></script>
+</head>
+
+<body class="gridContents">
+    <div class="sidenav">
+        <h1>Them's Fightin' Words!</h1><!--Title text at the top of the page-->
+        <table>
+            <tr>
+                <td style="padding-right: 30px">Players</td>
+                <td style="padding-right: 30px">HitPoints</td>
+            </tr>
+            <tr>
+                <td>
+                    <ul id="users"></ul>
+                </td>
+                <td>
+                    <ul id="HP"></ul>
+                </td>
+        </table>
+        <h4>Change Theme</h4>
+        <button onclick="setTheme('Western', grid)" title="Western" class="buttonStyle">Western</button>
+        <button onclick="setTheme('Modern', grid)"  title="Modern"  class="buttonStyle">Modern</button>
+        <button onclick="setTheme('Normal', grid)"  title="Normal"  class="buttonStyle">Normal</button>
+    </div>
+    <div class="centerContents">
+        <p class="RoomName" id="room-name"></p>
+        <a href="index.html" class="buttonStyle">Leave Room</a>
+        <div class="container" id="entiregrid"></div><!--Class for the "entiregrid" to be filled in a function-->
+        <table style="margin-bottom:10px;">
+            <!--<button onclick = "MakeAmongus(grid.containerId)" class = "buttonStyle">Amongus</button>-->
+            <!--Amogus-->
+            <!--Resets the board-->
+            <!-- <button onclick="grid.ClearBoard()" class="buttonStyle" style="visibility: hidden">Reset Board</button> -->
+            <!--Creates randomized tiles on board                                           add this for visibility off style="visibility: hidden"-->
+            <button onclick="grid.GenerateNewBoard()" class="buttonStyle" id="GenerateGrid"
+                style="visibility: hidden">New Board</button>
+            <!--Creates a randomized hand of letters-->
+            <button onclick="" class="buttonStyle" id="newHand" style="visibility: hidden">Generate New Hand</button>
+            <!--Fills empty spots in hand with letters-->
+            <!-- <button onclick="hand.FillHand()" class="buttonStyle" style="visibility: hidden">Fill Hand</button> -->
+            <!--Ends turn, initiates end of turn functions-->
+            <button onclick="" class="buttonStyle" id="EndTurn" style="visibility: hidden">End Turn</button>
+            <!--Checks for (strings > 2) long-->
+            <!-- <button onclick="hand.ShuffleHand()" class="buttonStyle" style="visibility: hidden">Shuffle</button> -->
+            <!-- <button id="myBtn" class="buttonStyle" id="UpdateStuff" style="visibility: hidden">Send Changes</button> -->
+            <!--<button onclick = "grid.getStrings()" class       = "buttonStyle">Log Words</button>-->
+        </table>
+        <div class="hand" id="handoftiles"></div><!--Class for the "handoftiles" to be filled in a function-->
+    </div>
+    <div class="chatlog" id="log-box"></div>
+    
+    <div id="tileEffects" class="tileEffects">
+        <div class="effectLine">
+            <div class="colorSquare red"></div>
+            <span class="colorText">Red - Increase damage by up to 1.4x</span>
+        </div>
+        <div class="effectLine">
+            <div class="colorSquare blue"></div>
+            <span class="colorText">Blue - Freeze a quarter of the opponent's hand</span>
+        </div>
+        <div class="effectLine">
+            <div class="colorSquare green"></div>
+            <span class="colorText">Green - Convert damage into healing for yourself</span>
+        </div>
+        <div class="effectLine">
+            <div class="colorSquare yellow"></div>
+            <span class="colorText">Yellow - Shuffle the letters on the board</span>
+        </div>
+        <div class="effectLine">
+            <div class="colorSquare purple"></div>
+            <span class="colorText">Purple - Initiate a random effect</span>
+        </div>
+    </div>
+
+</body>
+
+</html>

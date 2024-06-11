@@ -1,0 +1,260 @@
+:root,
+/* Variables */
+
+:root.Normal {
+  --pageColor: #e7e1d2;
+  --gridContentColor: #ffffffad;
+  --gridBorderColor: #000000;
+  --titleText: #17252a;
+  --gridText: #17252a;
+  --fontFamily: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande", "Lucida Sans", Arial, sans-serif;
+  --redTile: rgb(255 7 1);
+  --blueTile: rgb(1 192 255);
+  --greenTile: rgb(1 255 21);
+  --yellowTile: rgb(235 228 7);
+  --purpleTile: rgb(204 52 255);
+  --originTile: rgb(199, 157, 43);
+  --gridItemSize: 55px;
+}
+
+:root.Western {
+  --pageColor: #31180e;
+  --gridContentColor: rgb(240, 211, 150);
+  --gridBorderColor: #a2672f;
+  --titleText: #e6e7cb;
+  --gridText: #464245;
+  --fontFamily: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande", "Lucida Sans", Arial, sans-serif;
+  --redTile: rgb(224, 71, 44);
+  --blueTile: rgb(75, 168, 199);
+  --greenTile: rgb(56, 139, 63);
+  --yellowTile: rgb(219, 168, 0);
+  --purpleTile: rgb(185, 116, 207);
+  --originTile: rgb(255, 255, 255);
+  --gridItemSize: 55px;
+}
+
+/* Modern color palette */
+
+:root.Modern {
+  --pageColor: #17252a;
+  --gridContentColor: #def2f1;
+  --gridBorderColor: #2b7a78;
+  --titleText: #def2f1;
+  --gridText: #17252a;
+  --fontFamily: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande", "Lucida Sans", Arial, sans-serif;
+  --redTile: #D22730;
+  --blueTile: rgb(14, 176, 230);
+  --greenTile: #44D62C;
+  --yellowTile: #E0E722;
+  --purpleTile: #bc3edb;
+  --originTile: rgb(199, 157, 43);
+  --gridItemSize: 55px;
+}
+
+/* Layout */
+
+html {
+  background-color: var(--pageColor);
+  height: 100%;
+  margin: 0;
+}
+
+.centerContents {
+  margin: 0 auto;
+  height: 100%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1;
+}
+
+/*The container that holds the tiles of the board and hand */
+.container, .hand {
+  display: grid;
+  background-color: var(--pageColor);
+  padding: 2px;
+  justify-content: center;
+  gap: 1px;
+  color: var(--gridText);
+  font-family: var(--fontFamily);
+  font-weight: 700;
+  text-align: center;
+  user-select: none; 
+  z-index: 1;
+}
+
+/*The container that holds the tiles of the board */
+.container {
+  grid-template-columns: repeat(15, var(--gridItemSize));
+  grid-template-rows: repeat(15, var(--gridItemSize));
+}
+
+/*The container that holds the tiles of the hand */
+.hand {
+  grid-template-columns: repeat(10, var(--gridItemSize));
+  grid-template-rows: 55px;
+}
+
+/*The actual tiles themselves*/
+.internal {
+  background-color: var(--gridContentColor);
+  border: 3px solid var(--gridBorderColor);
+  padding: 10px;
+  font-size: 20px;
+  place-items: center;
+  border-radius: 3px;/*Rounded corners */
+  user-select: none; 
+  line-height: 1;
+}
+
+/* The text of the points on the tiles */
+.subtext {
+  font-size: 0.6em;
+  place-items: center;
+  user-select: none; 
+  line-height: 1;
+}
+
+/*The title box at the top of the page */
+.gridContents {
+  background-color: var(--pageColor);
+  justify-content: center;
+  text-align: center;
+  color: var(--titleText);
+  font-family: var(--fontFamily);
+  user-select: none; 
+}
+
+/*Buttons */
+.buttonStyle {
+  background-color: var(--pageColor);
+  height: 30px;
+  text-align: center;
+  font-family: var(--fontFamily);
+  color: var(--titleText);
+  border-color: var(--titleText);
+  user-select: none;
+}
+
+.sidenav {
+  float: left;
+  width: 100%;
+  position: fixed;
+  z-index: 0;
+  top: 20px;
+  left: 10px;
+  background: var(--pageColor);
+  overflow-x: hidden;
+  padding: 8px 0;
+  text-align: left;
+}
+
+.sidenav h1 {
+  white-space: nowrap;
+  text-align: left;
+}
+
+.chatlog {
+  width: 20%;
+  height: 50%;
+  border: 2px solid var(--gridBorderColor);
+  padding: 10px;
+  background-color: var(--gridContentColor);
+  float: right;
+  position: fixed;
+  overflow-x: hidden;
+  top: 20px;
+  right: 20px;
+  overflow-y: scroll;
+  text-align: left;
+  z-index: 0;
+  color: var(--gridText);
+}
+
+.tileEffects {
+  position: fixed;
+  padding: 10px;
+  bottom: 20px;
+  right: 20px;
+  width: 20%;
+  height: 20%;
+  text-align: left;
+  background-color: var(--gridContentColor);
+  border: 2px solid var(--gridBorderColor);
+  z-index: 0;
+}
+
+.effectLine {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.colorSquare {
+  width: 25px;
+  height: 25px;
+  min-width: 25px;
+  min-height: 25px;
+  margin-right: 10px;
+  border: 1px solid var(--gridBorderColor);
+}
+
+.red {
+  background-color: var(--redTile);
+}
+
+.blue {
+  background-color: var(--blueTile);
+}
+
+.green {
+  background-color: var(--greenTile);
+}
+
+.yellow {
+  background-color: var(--yellowTile);
+}
+
+.purple {
+  background-color: var(--purpleTile);
+}
+
+.colorText {
+  font-family: var(--fontFamily);
+  color: var(--gridText);
+}
+
+/*! vvv Depreciated Sections Below vvv */
+
+.textBoxStyle {
+  background-color: var(--pageColor);
+  height: 20px;
+  font-family: var(--fontFamily);
+  color: var(--titleText);
+  border-color: var(--titleText);
+}
+
+.config {
+  font-family: var(--fontFamily);
+  display: none;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0,0,0,0.4); /*Makes the background dimmed*/
+}
+
+.config-content {
+  font-family: var(--fontFamily);
+  background-color: var(--pageColor);
+  margin: 15% auto;
+  padding: 20px;
+  border: 3px solid var(--titleText);
+  width: 50%;
+  color: var(--titleText);
+}
+
